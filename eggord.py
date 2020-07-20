@@ -34,9 +34,11 @@ def date_to_clipboard() -> None:
 
 def main(args: Namespace) -> None:
     if args.path:
-        new_blog(path)
-    else:
+        new_blog(args.path)
+    elif sys.platform == "win32":
         date_to_clipboard()
+    else:
+        raise NotImplementedError("Sorry :P")
     
 if __name__ == "__main__":
     parser = ArgumentParser(description="Generates my preferred ISO dates")
