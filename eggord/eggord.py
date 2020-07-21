@@ -2,14 +2,13 @@
 This file contains the functions specified for type to use as cli
 commands
 """
-import sys
 from datetime import datetime
 
 import typer
 
-cli = typer.Typer()
+import eggord
 
-assert sys.version_info >= (3, 7), "Need at least Python 3.7 or higher"
+cli = typer.Typer()
 
 
 def get_date() -> str:
@@ -26,8 +25,16 @@ def get_date() -> str:
 
 
 @cli.command()
-def main() -> None:
+def hello() -> None:
     """
     default cli command
     """
     typer.echo("Hello, World!")
+
+
+@cli.command()
+def version() -> None:
+    """
+    Prints and returns the version string
+    """
+    typer.echo(eggord.__version__)
