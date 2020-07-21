@@ -1,41 +1,3 @@
-[tool.poetry]
-name = "eggord"
-version = "0.1.0"
-description = "Personal command line tool"
-authors = ["Matthew Willcockson <matthew@willcockson.family>"]
-license = "LICENSE"
-readme = "README.md"
-
-[tool.poetry.scripts]
-eggord = "eggord.eggord:cli"
-
-[tool.poetry.dependencies]
-python = "^3.8"
-pydantic = "^1.6.1"
-typer = "^0.3.1"
-
-[tool.poetry.dev-dependencies]
-black = "^19.10b0"
-mypy = "^0.782"
-isort = "^5.1.4"
-pytest = "^5.4.3"
-pytest-cov = "^2.10.0"
-nuitka = "^0.6.8"
-
-[tool.isort]
-profile = "black"
-# Ensures the output doesn't save if the resulting file contains syntax errors
-atomic = true
-# Add an explicitly defined source path (modules within src paths have their
-# imports automatically catorgorized as first_party)
-#src_paths = ["eggord", "tests"]
-src_paths = ["eggord"]
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
-
-[tool.pylint.MASTER]
-init-hook = '''
 # mypy: allow_any_expr
 (
     """
@@ -115,9 +77,8 @@ def munge_syspath() -> None:
         warn("Can't find poetry virtual environment")
         return
 
-    if site_packages not in sys.path:
+    if str(site_packages) not in sys.path:
         sys.path.append(str(site_packages.absolute()))
 
 
 munge_syspath()
-'''
