@@ -31,6 +31,7 @@ atomic = true
 # imports automatically catorgorized as first_party)
 #src_paths = ["eggord", "tests"]
 src_paths = ["eggord"]
+
 [tool.pylint.MASTER]
 init-hook = '''
 # mypy: allow_any_expr
@@ -102,9 +103,11 @@ def munge_syspath() -> None:
 
     if sys.platform == "linux":
         site_packages = poetry_venv / "lib" / f"python{majorminor}" / "site-packages"
+    elif sys.platform == "win32":
+        site_packages = poetry_venv / "Lib" / "site-packages"
     else:
         raise NotImplementedError(
-            f"Haven't implemented pylint sys.path munging"
+            f"Haven't implemented pylint sys.path munging\n"
             f"to find poetry virtual environment directories on {sys.platform}"
         )
 
@@ -112,12 +115,14 @@ def munge_syspath() -> None:
         warn("Can't find poetry virtual environment")
         return
 
-    if site_packages not in sys.path:
+    if str(site_packages) not in sys.path:
         sys.path.append(str(site_packages.absolute()))
 
 
 munge_syspath()
+
 '''
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"

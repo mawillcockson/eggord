@@ -67,9 +67,11 @@ def munge_syspath() -> None:
 
     if sys.platform == "linux":
         site_packages = poetry_venv / "lib" / f"python{majorminor}" / "site-packages"
+    elif sys.platform == "win32":
+        site_packages = poetry_venv / "Lib" / "site-packages"
     else:
         raise NotImplementedError(
-            f"Haven't implemented pylint sys.path munging"
+            f"Haven't implemented pylint sys.path munging\n"
             f"to find poetry virtual environment directories on {sys.platform}"
         )
 
