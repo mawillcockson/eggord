@@ -4,11 +4,6 @@ from typer.testing import CliRunner
 import eggord
 from eggord.eggord import cli
 
-
-def test_version() -> None:
-    assert eggord.__version__ == "0.1.0"
-
-
 runner = CliRunner()
 
 

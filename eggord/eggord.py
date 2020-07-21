@@ -9,7 +9,7 @@ import typer
 
 cli = typer.Typer()
 
-assert sys.version_info >= (3, 8), "Python version ~=3.8 needed"
+assert sys.version_info >= (3, 7), "Need at least Python 3.7 or higher"
 
 
 def get_date() -> str:
