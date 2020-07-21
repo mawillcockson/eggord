@@ -34,3 +34,11 @@ src_paths = ["eggord"]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
+[tool.pylint.MASTER]
+init-hook = """
+from pathlib import Path
+from subprocess import run
+import sys
+
+poetry
+sys.path.append("""
