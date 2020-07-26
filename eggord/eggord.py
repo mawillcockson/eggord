@@ -25,11 +25,11 @@ def get_date() -> str:
 
 
 @cli.command()
-def hello() -> None:
+def hello(firstname: str, lastname: str) -> None:
     """
     default cli command
     """
-    typer.echo("Hello, World!")
+    typer.echo(f"Hello, {firstname} {lastname}!")
 
 
 @cli.command()

@@ -36,10 +36,21 @@ def test_version(distribution_version: VersionFinder) -> None:
     assert result.stdout.strip() == distribution_version("eggord")
 
 
-def test_hello() -> None:
+def test_hello_no_firstname() -> None:
+    """
+    Makes sure the hello command raises an error when it is not provided with a
+    firstname
+    """
+    result = runner.invoke(cli, ["hello"])
+    assert result.exit_code == 0
+
+
+@pytest.mark.parametrize("firstname", ["World", "you", " ", "{}"])
+@pytest.mark.parametrize("lastname", ["World", "you", " ", "{}", None])
+def test_hello(firstname: str, lastname: str) -> None:
     """
     Does the hello world command print hello world?
     """
-    result = runner.invoke(cli, "hello")
+    result = runner.invoke(cli, ["hello", firstname, lastname])
     assert result.exit_code == 0
-    assert "Hello, World!" in result.stdout
+    assert f"Hello, {firstname} {lastname}!" in result.stdout
