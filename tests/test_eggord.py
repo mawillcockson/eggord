@@ -4,10 +4,7 @@ Tests for the main portion of the application
 
 from typing import Callable
 
-# NOTE:LINT Remove linting disable once pytest is in use
 import pytest  # pylint: disable=unused-import
-
-# Available because pytest is available
 from typer.testing import CliRunner
 
 import eggord
@@ -42,7 +39,9 @@ def test_hello_no_firstname() -> None:
     firstname
     """
     result = runner.invoke(cli, ["hello"])
-    assert result.exit_code == 0
+    assert result.exit_code == 2
+    # NOTE:WIP verify response to no arguments
+    assert result.output == cli.info.short_help
 
 
 @pytest.mark.parametrize("firstname", ["World", "you", " ", "{}"])

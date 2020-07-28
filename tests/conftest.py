@@ -6,23 +6,7 @@ from typing import Callable
 
 import pytest
 
-# NOTE:BUG python/mypy#1153
-# Would love to do the below, but can't until this issue is resolved:
-# https://github.com/python/mypy/issues/1153
-# try:
-#     from importlib.metadata import version
-# except ImportError:
-#     from importlib_metadata import version
-#
-# Using workarounds from:
-# https://github.com/python/mypy/issues/1153#issuecomment-560119116
-# https://github.com/bhrutledge/mypy-importlib-metadata
-import sys  # isort: skip pylint: disable=wrong-import-order
-
-if sys.version_info >= (3, 8):
-    from importlib.metadata import version
-else:
-    from importlib_metadata import version  # pylint: disable=import-error
+from eggord import version
 
 
 @pytest.fixture()

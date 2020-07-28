@@ -26,13 +26,20 @@ https://github.com/python-poetry/poetry/issues/144
 # Using workarounds from:
 # https://github.com/python/mypy/issues/1153#issuecomment-560119116
 # https://github.com/bhrutledge/mypy-importlib-metadata
-import sys  # isort: skip
+# isort: off
+import sys
 
 if sys.version_info >= (3, 8):
-    from importlib.metadata import version
+    # NOTE:TYPE "as version" for mypy
+    # https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-no-implicit-reexport
+    from importlib.metadata import (  # pylint: disable=useless-import-alias
+        version as version,
+    )
 else:
     from importlib_metadata import version  # pylint: disable=import-error
+# isort: on
 
-# NOTE:TYPE mypy can't detect the return type of backported version()
+# NOTE:TYPE mypy can't detect the return type of backported
+# importlib_metadata.version();
 # Needs typing.cast(str, version()) on Python 3.7-
 __version__ = str(version(__name__))
