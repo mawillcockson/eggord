@@ -25,16 +25,24 @@ def get_date() -> str:
 
 
 @cli.command()
-def hello(firstname: str, lastname: str) -> None:
+def hello(firstname: str, lastname: str, yell: bool = False) -> None:
     """
-    default cli command
+    Says hello
     """
-    typer.echo(f"Hello, {firstname} {lastname}!")
+    if lastname:
+        greeting = f"Hello, {firstname} {lastname}!"
+    else:
+        greeting = f"Hello, {firstname}!"
+
+    if yell:
+        typer.echo(greeting.upper())
+    else:
+        typer.echo(greeting)
 
 
 @cli.command()
 def version() -> None:
     """
-    Prints and returns the version string
+    Prints the version string
     """
     typer.echo(eggord.__version__)
