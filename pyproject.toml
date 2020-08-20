@@ -18,13 +18,13 @@ pytest-cov = "^2.10.0"
 pytest = "^6.0.0"
 
 [tool.poetry.dev-dependencies]
-black = "^19.10b0"
-mypy = "^0.782"
-isort = "^5.1.4"
-pytest = "^6.0.0"
-pytest-cov = "^2.10.0"
-nuitka = "^0.6.8"
-tox = "^3.17.1"
+black = {version = "*", allow-prereleases = true}
+mypy = "*"
+isort = "*"
+nuitka = "*"
+tox = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
